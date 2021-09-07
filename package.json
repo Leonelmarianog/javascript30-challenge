@@ -1,0 +1,12 @@
+{
+  "name": "javascript30-challenge",
+  "version": "1.0.0",
+  "description": "30 day vanilla JS coding challenge.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Leonel Gauna",
+  "license": "ISC"
+}

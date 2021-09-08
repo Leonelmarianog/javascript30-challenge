@@ -1,0 +1,158 @@
+:root {
+    --clock-width: 200px;
+    --clock-height: var(--clock-width);
+    --clock-min-width: 200px;
+    --clock-min-height: var(--clock-min-width);
+    --clock-border-width: calc(var(--clock-width) - var(--clock-width) * 0.95);
+    
+    --hours-hand-width: var(--clock-border-width);
+    --hours-hand-height: calc((var(--clock-width) / 2) - (var(--clock-border-width) * 3.75));
+    
+    --minutes-hand-width: var(--clock-border-width);
+    --minutes-hand-height: calc((var(--clock-width) / 2) - (var(--clock-border-width) * 2));
+    
+    --seconds-hand-width: calc(var(--clock-border-width) * 0.5);
+    --seconds-hand-height: calc((var(--clock-width) / 2) - (var(--clock-border-width) * 1.75));
+   
+    --clock-center-width: calc(var(--clock-border-width) * 1.75);
+    --clock-center-height: var(--clock-center-width);
+
+    --clock-color: #000;
+    --hours-hand-color: #000;
+    --minutes-hand-color: #000;
+    --seconds-hand-color: #f00;
+    --clock-center-color: #000;
+    --bg-color-1: #e68e35;
+    --bg-color-2: #dd517d;
+    --bg-color-3: #461e52;
+    --bg-color-4: #7a99ee;
+    --bg-color-5: #556cc9;
+}
+
+@media screen and (min-width: 320px) {
+    :root {
+        --clock-width: 75vw;
+    }
+}
+
+@media screen and (min-width: 576px) {
+    :root {
+        --clock-width: 75vh;
+    }
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    background: linear-gradient(180deg, var(--bg-color-3), var(--bg-color-2), var(--bg-color-1), var(--bg-color-4), var(--bg-color-5));
+    background-attachment: fixed;
+}
+
+.container {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.clock {
+    border: var(--clock-border-width) solid var(--clock-color);
+    width: var(--clock-width);
+    height: var(--clock-height);
+    min-width: var(--clock-min-width);
+    min-height: var(--clock-min-height);
+    border-radius: 50%;
+    position: relative;
+}
+
+.clock::after {
+    content: "";
+    width: var(--clock-center-width);
+    height: var(--clock-center-height);
+    background-color: var(--clock-center-color);
+    position: absolute;
+    top: calc(50% - (var(--clock-center-height) * 0.5));
+    left: calc(50% - (var(--clock-center-width) * 0.5));
+    border-radius: 50%;
+}
+
+.hours-hand {
+    width: 0;
+    height: 0;
+    position: absolute;
+    top: 50%;
+    left: calc(50% - var(--hours-hand-width) * 0.5);
+    transform: rotate(0deg);
+    transform-origin: top center;
+    border-right: calc(var(--hours-hand-width) * 0.5) solid transparent;
+    border-left: calc(var(--hours-hand-width) * 0.5) solid transparent;
+    border-top: var(--hours-hand-height) solid var(--hours-hand-color);
+}
+
+.minutes-hand {
+    width: 0;
+    height: 0;
+    position: absolute;
+    top: 50%;
+    left: calc(50% - var(--minutes-hand-width) * 0.5);
+    transform: rotate(0deg);
+    transform-origin: top center;
+    border-right: calc(var(--minutes-hand-width) * 0.5) solid transparent;
+    border-left: calc(var(--minutes-hand-width) * 0.5) solid transparent;
+    border-top: var(--minutes-hand-height) solid var(--minutes-hand-color);
+}
+
+.seconds-hand {
+    width: 0;
+    height: 0;
+    position: absolute;
+    top: 50%;
+    left: calc(50% - var(--seconds-hand-width) * 0.5);
+    transform: rotate(0deg);
+    transform-origin: top center;
+    border-right: calc(var(--seconds-hand-width) * 0.5) solid transparent;
+    border-left: calc(var(--seconds-hand-width) * 0.5) solid transparent;
+    border-top: var(--seconds-hand-height) solid var(--seconds-hand-color);
+}
+
+/* rectangles as clock hands */
+
+/* .hours-hand {
+    width: var(--hours-hand-width);
+    height: var(--hours-hand-height);
+    background-color: #000;
+    position: absolute;
+    top: 50%;
+    left: calc(50% - var(--hours-hand-width) * 0.5);
+    transform: rotate(0deg);
+    transform-origin: top center;
+}
+
+.minutes-hand {
+    width: var(--minutes-hand-width);
+    height: var(--minutes-hand-height);
+    background-color: #222;
+    position: absolute;
+    top: 50%;
+    left: calc(50% - var(--hours-hand-width) * 0.5);
+    transform: rotate(0deg);
+    transform-origin: top center;
+}
+
+.seconds-hand {
+    width: var(--minutes-hand-width);
+    height: var(--minutes-hand-height);
+    background-color: #f00;
+    position: absolute;
+    top: 50%;
+    left: calc(50% - var(--hours-hand-width) * 0.5);
+    transform: rotate(0deg);
+    transform-origin: top center;
+} */

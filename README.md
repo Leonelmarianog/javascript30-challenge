@@ -6,7 +6,13 @@ Solutions to the [JavaScript30](https://javascript30.com/) challenge. Also tests
 
 ## How to run any of the challenges
 
-WIP
+A code editor like [VSCode](https://code.visualstudio.com/) and [Node.JS](https://nodejs.org/es/) are needed.
+
+1. Open the desired challenge in your code editor and run `npm install` to install dependencies.
+
+2. Run `npm run serve` and visit http://localhost:8080/
+
+3. You can also run tests by running `npm run test` (collects coverage) or `npm run test:dev` (watch for changes).
 
 ## Solutions
 

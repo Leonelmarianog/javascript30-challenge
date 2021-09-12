@@ -1,0 +1,62 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  background: #222;
+  color: #fff;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.container {
+  height: 100%;
+}
+
+.form-container {
+  display: flex;
+  justify-content: center;
+  padding: 1em 0;
+}
+
+.form {
+  display: grid;
+  grid-template-columns: max-content max-content;
+  gap: 2em 1em;
+  justify-items: center;
+  align-items: center;
+}
+
+@media screen and (min-width: 576px) {
+  .form-container {
+    padding: 2em;
+  }
+
+  .form {
+    display: flex;
+  }
+}
+
+.form > label {
+  justify-self: flex-end;
+}
+
+.image-container {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  padding: 2em 0;
+}
+
+.image-container > img {
+  display: block;
+  width: 50%;
+  min-width: 200px;
+  height: auto;
+}

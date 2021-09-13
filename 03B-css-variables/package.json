@@ -1,0 +1,21 @@
+{
+  "name": "03b-css-variables",
+  "version": "1.0.0",
+  "description": "3rd JavaScript30 challenge.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --coverage",
+    "test:dev": "jest --watchAll",
+    "serve": "http-server -c-1"
+  },
+  "keywords": [],
+  "author": "Leonel Gauna",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.15.5",
+    "@babel/preset-env": "^7.15.6",
+    "babel-jest": "^27.1.1",
+    "http-server": "^13.0.1",
+    "jest": "^27.1.1"
+  }
+}

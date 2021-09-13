@@ -1,0 +1,22 @@
+{
+  "name": "05-flex-panel-image-gallery",
+  "version": "1.0.0",
+  "description": "javascript30 challenge 5.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --coverage",
+    "test:dev": "jest --watchAll",
+    "serve": "http-server -c-1"
+  },
+  "keywords": [],
+  "author": "Leonel Gauna",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.15.5",
+    "@babel/preset-env": "^7.15.6",
+    "@types/jest": "^27.0.1",
+    "babel-jest": "^27.2.0",
+    "http-server": "^13.0.1",
+    "jest": "^27.2.0"
+  }
+}

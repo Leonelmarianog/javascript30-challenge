@@ -34,3 +34,4 @@ _Some of these challenges might not have any dependencies since they are just pr
 | Day 3 - CSS Variables                         | [Link](https://leonelmarianog.github.io/javascript30-challenge/03B-css-variables/index.html)           |
 | Day 4 - Array Cardio 1                        | [Link](https://leonelmarianog.github.io/javascript30-challenge/04-array-cardio-1/index.html)           |
 | Day 5 - Flex Panel Image Gallery              | [Link](https://leonelmarianog.github.io/javascript30-challenge/05-flex-panel-image-gallery/index.html) |
+| Day 6 - Ajax Type Ahead                       | [Link](https://leonelmarianog.github.io/javascript30-challenge/06-ajax-type-ahead/index.html)          |

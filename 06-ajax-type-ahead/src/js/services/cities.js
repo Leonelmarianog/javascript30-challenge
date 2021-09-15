@@ -1,6 +1,6 @@
 import { getCitiesFromApi } from '../api/cities.js';
 import { getCitiesFromStorage, saveCitiesInStorage } from '../storage/cities.js';
-import { fromApiToCity, fromStorageToCity } from '../mappers/city.js';
+import { fromApiToCity, fromStorageToCity } from '../mappers/cities.js';
 import { City } from '../entities/city.js';
 
 /**

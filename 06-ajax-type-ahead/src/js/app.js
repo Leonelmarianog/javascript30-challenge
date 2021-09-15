@@ -35,21 +35,16 @@ const handleInput = async (e) => {
   const cities = await getCities();
   const cityMatches = findCityMatches(inputValue, cities);
   const dataListContent = createDatalistInnerHtml(inputValue, cityMatches);
-
   displayDatalistInnerHtml(dataListContent);
 };
 
 /**
  * @param {Event} e
  */
-const onInput = async (e) => {
-  try {
-    handleInput(e);
-  } catch (error) {
-    console.error(error);
-  }
+const onInput = (e) => {
+  handleInput(e).catch((err) => console.error(err));
 };
 
-export const init = async () => {
+export const init = () => {
   document.querySelector('input').addEventListener('input', onInput);
 };

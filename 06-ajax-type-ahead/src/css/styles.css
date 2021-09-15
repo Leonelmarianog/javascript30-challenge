@@ -1,0 +1,59 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  background: radial-gradient(#222, #000);
+  font-family: monospace;
+}
+
+main {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+form {
+  width: 50vw;
+  min-width: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.input {
+  background-color: #555;
+  padding: 0.5em 1em;
+  color: #fff;
+  height: 4em;
+}
+
+.datalist {
+  border: 1px solid black;
+  background-color: #555;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 25em;
+  overflow-y: scroll;
+}
+
+.datalist > li {
+  padding: 0.5em;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.datalist > li:hover {
+  background-color: #666;
+}

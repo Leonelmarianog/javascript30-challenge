@@ -26,13 +26,15 @@ _Some of these challenges might not have any dependencies since they are just pr
 
 ## Solutions
 
-| Challenge                                     | Demo                                                                                                   |
-| --------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
-| Day 1 - JavaScript Drumkit                    | [Link](https://leonelmarianog.github.io/javascript30-challenge/01-javascript-drum-kit/index.html)      |
-| Day 2 - CSS + JS Clock                        | [Link](https://leonelmarianog.github.io/javascript30-challenge/02-css-js-clock/index.html)             |
-| Day 3 - CSS Variables (No CSS variables used) | [Link](https://leonelmarianog.github.io/javascript30-challenge/03A-css-variables/index.html)           |
-| Day 3 - CSS Variables                         | [Link](https://leonelmarianog.github.io/javascript30-challenge/03B-css-variables/index.html)           |
-| Day 4 - Array Cardio 1                        | [Link](https://leonelmarianog.github.io/javascript30-challenge/04-array-cardio-1/index.html)           |
-| Day 5 - Flex Panel Image Gallery              | [Link](https://leonelmarianog.github.io/javascript30-challenge/05-flex-panel-image-gallery/index.html) |
-| Day 6 - Ajax Type Ahead                       | [Link](https://leonelmarianog.github.io/javascript30-challenge/06-ajax-type-ahead/index.html)          |
-| Day 7 - Array Cardio 2                        | [Link](https://leonelmarianog.github.io/javascript30-challenge/07-array-cardio-2/index.html)           |
+| Challenge                                     | Demo                                                                                                          |
+| --------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| Day 1 - JavaScript Drumkit                    | [Link](https://leonelmarianog.github.io/javascript30-challenge/01-javascript-drum-kit/index.html)             |
+| Day 2 - CSS + JS Clock                        | [Link](https://leonelmarianog.github.io/javascript30-challenge/02-css-js-clock/index.html)                    |
+| Day 3 - CSS Variables (No CSS variables used) | [Link](https://leonelmarianog.github.io/javascript30-challenge/03A-css-variables/index.html)                  |
+| Day 3 - CSS Variables                         | [Link](https://leonelmarianog.github.io/javascript30-challenge/03B-css-variables/index.html)                  |
+| Day 4 - Array Cardio 1                        | [Link](https://leonelmarianog.github.io/javascript30-challenge/04-array-cardio-1/index.html)                  |
+| Day 5 - Flex Panel Image Gallery              | [Link](https://leonelmarianog.github.io/javascript30-challenge/05-flex-panel-image-gallery/index.html)        |
+| Day 6 - Ajax Type Ahead                       | [Link](https://leonelmarianog.github.io/javascript30-challenge/06-ajax-type-ahead/index.html)                 |
+| Day 7 - Array Cardio 2                        | [Link](https://leonelmarianog.github.io/javascript30-challenge/07-array-cardio-2/index.html)                  |
+| Day 9 - Dev Tools Domination                  | [Link](https://leonelmarianog.github.io/javascript30-challenge/09-dev-tools-domination/index.html)            |
+| Day 10 - Group Select Checkboxes              | [Link](https://leonelmarianog.github.io/javascript30-challenge/10-hold-shift-and-check-checkboxes/index.html) |

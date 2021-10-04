@@ -1,0 +1,198 @@
+:root {
+  --player-width: 100vw;
+  --progress-width: var(--player-width);
+  --progress-height: calc(var(--progress-width) * 0.004);
+  --thumb-height: calc(var(--progress-height) * 4);
+  --thumb-width: var(--thumb-height);
+  --button-width: calc(var(--player-width) / 20);
+  --button-height: calc(var(--player-width) / 20);
+}
+
+@media screen and (min-width: 576px) {
+  :root {
+    --player-width: 75vw;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  background: radial-gradient(#222, #000);
+  background-attachment: fixed;
+}
+
+main {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.video-player {
+  height: auto;
+  width: var(--player-width);
+  margin: auto;
+  position: relative;
+  overflow: hidden;
+}
+
+.player-screen {
+  display: block; /* https://stackoverflow.com/questions/26979003/space-after-html5s-video-tag */
+  width: 100%;
+}
+
+.player-controls {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: auto;
+  width: 100%;
+  padding: 0 calc(var(--player-width) * 0.025);
+}
+
+.progress {
+  height: var(--progress-height);
+  width: 100%;
+  cursor: pointer;
+  position: relative;
+}
+
+.progress-track {
+  background-color: #555;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  transition: transform 0.2s;
+}
+
+.progress-fill {
+  background-color: #f00;
+  width: 0%;
+  height: 100%;
+  position: absolute;
+  transition: transform 0.2s;
+}
+
+.progress-highlight {
+  background-color: #777;
+  width: 0%;
+  height: 100%;
+  position: absolute;
+  transition: transform 0.2s;
+}
+
+.progress-thumb {
+  height: var(--thumb-height);
+  width: var(--thumb-width);
+  background-color: #f00;
+  border-radius: 50%;
+  position: absolute;
+  top: calc(50% - var(--thumb-height) * 0.5);
+  left: 0%;
+  transform: scale(0);
+  transition: transform 0.2s;
+}
+
+.buttons {
+  display: flex;
+  position: relative;
+}
+
+.buttons-left,
+.buttons-right {
+  display: flex;
+}
+
+.buttons-left {
+  margin-right: auto;
+}
+
+.buttons-right {
+  margin-left: auto;
+}
+
+.player-btn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: #ddd;
+  transition: color 0.2s;
+  padding: 0.75em;
+  font-size: calc(var(--player-width) * 0.02);
+  position: relative;
+}
+
+.player-btn:hover {
+  color: #fff;
+}
+
+.icon {
+  pointer-events: none; /* No events from whatever element this class is put on*/
+}
+
+.hidden {
+  display: none;
+}
+
+.player-volume {
+  width: 5em;
+  padding: 1em 0;
+  cursor: pointer;
+  display: none;
+}
+
+.player-time {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ddd;
+  padding: 0.75em;
+  margin: 0;
+  white-space: nowrap;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  font-size: calc(var(--player-width) * 0.015);
+}
+
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(hsl(0, 0%, 0%, 0), hsl(0, 0%, 0%, 0.5));
+}
+
+.tooltip {
+  color: #ddd;
+  border-radius: 2.5px;
+  white-space: nowrap;
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
+  font-size: calc(var(--player-width) * 0.015);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.button-tooltip {
+  position: absolute;
+  top: calc(var(--progress-height) * -12);
+  left: 0;
+  background-color: #222;
+  padding: 0.5em;
+}
+
+.progress-tooltip {
+  position: absolute;
+  top: calc(var(--progress-height) * -10);
+  left: 0;
+  background-color: transparent;
+}

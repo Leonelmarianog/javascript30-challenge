@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 11 - Custom Video Player</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./src/css/normalize.css">
+    <link rel="stylesheet" href="./src/css/styles.css">
+</head>
+<body>
+    <main>
+        <div class="video-player" id="video-player">
+            <!-- <video></video> -->
+
+            <div class="background"></div>
+
+            <div class="player-controls" id="player-controls">
+                <div class="progress" id="progress" data-max="" data-value="">
+                    <time class="tooltip progress-tooltip" id="progress-tooltip"><!-- --></time>
+                    <div class="progress-track" id="progress-track"></div>
+                    <div class="progress-highlight" id="progress-highlight"></div>
+                    <div class="progress-fill" id="progress-fill"></div>
+                    <div class="progress-thumb" id="progress-thumb"></div>
+                </div>
+
+                <div class="buttons" id="buttons">
+                    <div class="tooltip button-tooltip" id="button-tooltip"><!-- --></div>
+
+                    <div class="buttons-left">
+                        <button class="player-btn" id="backwards-btn" data-title="Backwards (Left Arrow)">
+                            <span class="icon">
+                                <i class="fas fa-backward"></i>
+                            </span>
+                        </button>
+                        <button class="player-btn" id="play-btn" data-title="Play (k)">
+                            <span class="icon"><i class="fas fa-play"></i></span>
+                            <span class="icon hidden"><i class="fas fa-pause"></i></span>
+                        </button>
+                        <button class="player-btn" id="forwards-btn" data-title="Forwards (Right Arrow)">
+                            <span class="icon">
+                                <i class="fas fa-forward"></i>
+                            </span>
+                        </button>
+                        <button class="player-btn" id="volume-btn" data-title="Mute (m)">
+                            <span class="icon">
+                                <i class="fas fa-volume-up"></i>
+                            </span>
+                        </button>
+                        <p class="player-time" id="video-time">
+                            <time id="time-elapsed-timestamp">--:--</time>
+                            <span>&nbsp;/&nbsp;</span>
+                            <time id="video-length-timestamp">--:--</time>
+                        </p>
+                    </div>
+    
+                    <div class="buttons-right">
+                        <button class="player-btn" id="config-btn" data-title="Configuration">
+                            <span class="icon">
+                                <i class="fas fa-cog"></i>
+                            </span>
+                        </button>
+                        <button class="player-btn" id="fullscreen-btn" data-title="Fullscreen (f)">
+                            <span class="icon">
+                                <i class="fas fa-expand"></i>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script type="module" src="./src/js/index.js"></script>
+</body>
+</html>

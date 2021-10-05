@@ -1,5 +1,12 @@
 import { updateLengthTimestamp, updateTimeElapsedTimestamp } from './ui/general.js';
 import {
+  displayMiddleHelper,
+  displaySkipBackwardsHelper,
+  displaySkipForwardsHelper,
+  hideSkipBackwardsHelper,
+  hideSkipForwardsHelper,
+} from './ui/helpers.js';
+import {
   createVideoElement,
   getVideoLength,
   getVideoTimeElapsed,
@@ -73,6 +80,9 @@ const handleVideoPlayback = (e) => {
   updateTooltipTextContent(e.currentTarget.getAttribute('data-title'));
   attachButtonTooltipToElement(e.currentTarget);
   displayButtonTooltip();
+  displayMiddleHelper(
+    ...Array.from(e.currentTarget.children).filter((icon) => !icon.classList.contains('hidden'))
+  );
 };
 
 const handleVideoEnd = () => {
@@ -97,10 +107,14 @@ const handleSkipVideoByButton = (e) => {
  */
 const handleSkipVideoByKey = (e) => {
   if (e.key === KeyShortcuts.ARROW_RIGHT) {
+    hideSkipBackwardsHelper();
+    displaySkipForwardsHelper(videoConfig.SKIP_AMOUNT_IN_SECONDS);
     skipVideoByAmount(videoConfig.SKIP_AMOUNT_IN_SECONDS);
   }
 
   if (e.key === KeyShortcuts.ARROW_LEFT) {
+    hideSkipForwardsHelper();
+    displaySkipBackwardsHelper(videoConfig.SKIP_AMOUNT_IN_SECONDS);
     skipVideoByAmount(-videoConfig.SKIP_AMOUNT_IN_SECONDS);
   }
 };

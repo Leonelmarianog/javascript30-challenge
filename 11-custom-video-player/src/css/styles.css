@@ -219,7 +219,7 @@ main {
   font-family: 'Roboto', sans-serif;
 }
 
-.helper-playback {
+.playback-helper {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -253,8 +253,8 @@ main {
   animation-name: fadeInOutAndScale;
 }
 
-.helper-skip-forwards,
-.helper-skip-backwards {
+.skip-forwards-helper,
+.skip-backwards-helper {
   top: 50%;
   right: 10%;
   transform: translate(0, -50%);
@@ -265,11 +265,11 @@ main {
   animation-timing-function: linear;
 }
 
-.helper-skip-forwards {
+.skip-forwards-helper {
   right: 10%;
 }
 
-.helper-skip-backwards {
+.skip-backwards-helper {
   left: 10%;
 }
 

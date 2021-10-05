@@ -1,9 +1,9 @@
 const $skipBackwardsHelper = document.querySelector('#skip-backwards-helper');
-const $skipBackwardsIcon = document.querySelector('.skip-backwards-icon');
+const $skipBackwardsIcon = document.querySelector('#skip-backwards-icon');
 const $skipBackwardsText = document.querySelector('#skip-backwards-text');
 
 const $skipForwardsHelper = document.querySelector('#skip-forwards-helper');
-const $skipForwardsIcon = document.querySelector('.skip-forwards-icon');
+const $skipForwardsIcon = document.querySelector('#skip-forwards-icon');
 const $skipForwardsText = document.querySelector('#skip-forwards-text');
 
 const $playbackHelper = document.querySelector('#playback-helper');

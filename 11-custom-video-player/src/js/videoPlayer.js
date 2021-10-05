@@ -1,6 +1,6 @@
 import { updateLengthTimestamp, updateTimeElapsedTimestamp } from './ui/general.js';
 import {
-  displayMiddleHelper,
+  displayPlaybackHelper,
   displaySkipBackwardsHelper,
   displaySkipForwardsHelper,
   hideSkipBackwardsHelper,
@@ -80,13 +80,18 @@ const handleVideoPlayback = (e) => {
   updateTooltipTextContent(e.currentTarget.getAttribute('data-title'));
   attachButtonTooltipToElement(e.currentTarget);
   displayButtonTooltip();
-  displayMiddleHelper(
-    ...Array.from(e.currentTarget.children).filter((icon) => !icon.classList.contains('hidden'))
-  );
 };
 
 const handleVideoEnd = () => {
   togglePlayButtonIcon();
+};
+
+const handleVideoClick = () => {
+  toggleVideoStatus();
+  toggleVideoPlayback();
+  togglePlayButtonIcon();
+  togglePlayButtonTitleFromVideoStatus(isVideoPaused());
+  displayPlaybackHelper(isVideoPaused());
 };
 
 /**
@@ -246,6 +251,7 @@ export const init = () => {
   $video.addEventListener('loadedmetadata', handleVideoLoad);
   $video.addEventListener('timeupdate', handleVideoTimeUpdate);
   $video.addEventListener('ended', handleVideoEnd);
+  $video.addEventListener('click', handleVideoClick);
 
   $playBtn.addEventListener('click', handleVideoPlayback);
   $backwardsBtn.addEventListener('click', handleSkipVideoByButton);

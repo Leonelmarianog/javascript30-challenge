@@ -6,10 +6,19 @@ const $skipForwardsHelper = document.querySelector('#skip-forwards-helper');
 const $skipForwardsIcon = document.querySelector('.skip-forwards-icon');
 const $skipForwardsText = document.querySelector('#skip-forwards-text');
 
-const $middleHelper = document.querySelector('#middle-helper');
+const $playbackHelper = document.querySelector('#playback-helper');
+const $playIcon = document.querySelector('#play-icon');
+const $pauseIcon = document.querySelector('#pause-icon');
 
-const updateMiddleHelperInnerHtml = (element) => {
-  $middleHelper.innerHTML = element.outerHTML;
+const togglePlaybackHelperIcon = (isVideoPaused) => {
+  if (isVideoPaused) {
+    $playIcon.classList.add('hidden');
+    $pauseIcon.classList.remove('hidden');
+    return;
+  }
+
+  $playIcon.classList.remove('hidden');
+  $pauseIcon.classList.add('hidden');
 };
 
 const updateSkipFordwardsText = (text) => {
@@ -36,9 +45,9 @@ const resetElementAnimation = (element, animation) => {
   });
 };
 
-export const displayMiddleHelper = (icon) => {
-  updateMiddleHelperInnerHtml(icon);
-  resetElementAnimation($middleHelper, 'fade-in-out-and-scale');
+export const displayPlaybackHelper = (isVideoPaused) => {
+  togglePlaybackHelperIcon(isVideoPaused);
+  resetElementAnimation($playbackHelper, 'fade-in-out-and-scale');
 };
 
 export const displaySkipBackwardsHelper = (skipAmountInSeconds) => {

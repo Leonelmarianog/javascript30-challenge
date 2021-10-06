@@ -6,6 +6,9 @@
   --thumb-width: var(--thumb-height);
   --button-width: calc(var(--player-width) / 20);
   --button-height: calc(var(--player-width) / 20);
+
+  --volume-controls-width: 0;
+  --volume-slider-width: calc(var(--player-width) * 0.075);
 }
 
 @media screen and (min-width: 576px) {
@@ -337,4 +340,52 @@ main {
 
 .color-fade > span {
   animation-name: colorFade;
+}
+
+.volume-container {
+  display: flex;
+  align-items: center;
+}
+
+.volume-controls {
+  cursor: pointer;
+  height: 100%;
+  width: var(--volume-controls-width);
+  transition: width 0.2s ease-in-out;
+  overflow: hidden;
+  position: relative;
+}
+
+.volume {
+  height: var(--progress-height);
+  width: var(--volume-slider-width);
+  cursor: pointer;
+  top: 50%;
+  left: 0;
+  transform: translate(0, -50%);
+  position: absolute;
+}
+
+.volume-track {
+  background-color: #555;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
+.volume-fill {
+  background-color: #fff;
+  width: 0%;
+  height: 100%;
+  position: absolute;
+}
+
+.volume-thumb {
+  height: var(--thumb-height);
+  width: var(--thumb-width);
+  background-color: #fff;
+  border-radius: 50%;
+  position: absolute;
+  top: calc(50% - var(--thumb-height) * 0.5);
+  left: 0%;
 }

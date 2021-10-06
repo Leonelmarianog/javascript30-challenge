@@ -18,6 +18,8 @@ import {
   toggleVideoStatus,
   getVideoStatus,
   isVideoPaused,
+  updateVideoVolume,
+  getVideoVolume,
 } from './ui/video.js';
 import {
   calculateProgressOffsetX,
@@ -45,9 +47,21 @@ import {
   updateTooltipTextContent,
   togglePlayButtonIcon,
   togglePlayButtonTitleFromVideoStatus,
+  updateVolumeButtonIcon,
 } from './ui/buttons.js';
 import { VideoStatus, KeyShortcuts } from './enums/index.js';
 import { config as videoConfig } from './config/video.js';
+import {
+  calculateVolumeOffsetX,
+  displayVolumeSlider,
+  getVolumeValue,
+  hideVolumeSlider,
+  setVolumeMaxValue,
+  setVolumeValue,
+  updateVolumePosition,
+  updateVolumePositionFromAttributes,
+  updateVolumeValue,
+} from './ui/volume.js';
 
 /**
  * @param {Event} e
@@ -55,6 +69,10 @@ import { config as videoConfig } from './config/video.js';
 const handleVideoLoad = (e) => {
   setProgressValue(e.target.currentTime);
   setProgressMaxValue(e.target.duration);
+  setVolumeValue(e.target.volume);
+  setVolumeMaxValue(1);
+  updateVolumeButtonIcon(e.target.volume);
+  updateVolumePositionFromAttributes();
   updateProgressPositionFromAttributes();
   updateTimeElapsedTimestamp(getVideoTimeElapsed());
   updateLengthTimestamp(getVideoLength());
@@ -234,6 +252,35 @@ const handleButtonsMouseOut = (e) => {
   }
 };
 
+const handleVolumeMouseDown = (e) => {
+  e.preventDefault();
+
+  document.addEventListener('mousemove', handleVolumeDocumentMouseMove);
+  document.addEventListener('mouseup', handleVolumeDocumentMouseUp);
+
+  updateVolumePosition(calculateVolumeOffsetX(e.pageX));
+  updateVolumeValue(calculateVolumeOffsetX(e.pageX));
+  updateVideoVolume(getVolumeValue());
+  updateVolumeButtonIcon(getVideoVolume());
+};
+
+const handleVolumeDocumentMouseMove = (e) => {
+  updateVolumePosition(calculateVolumeOffsetX(e.pageX));
+  updateVolumeValue(calculateVolumeOffsetX(e.pageX));
+  updateVideoVolume(getVolumeValue());
+  updateVolumeButtonIcon(getVideoVolume());
+  displayVolumeSlider();
+};
+
+const handleVolumeDocumentMouseUp = (e) => {
+  if (!e.target.closest('#buttons-left')) {
+    hideVolumeSlider();
+  }
+
+  document.removeEventListener('mousemove', handleVolumeDocumentMouseMove);
+  document.removeEventListener('mouseup', handleVolumeDocumentMouseUp);
+};
+
 export const init = () => {
   const $videoPlayer = document.querySelector('#video-player');
   const $video = createVideoElement({
@@ -247,6 +294,11 @@ export const init = () => {
   const $forwardsBtn = document.querySelector('#forwards-btn');
   const $progressBar = document.querySelector('#progress');
   const $buttons = document.querySelector('#buttons');
+  const $volumeControls = document.querySelector('#volume-controls');
+  const $volumeContainer = document.querySelector('#volume-container');
+  const $buttonsRight = document.querySelector('#buttons-right');
+  const $buttonsLeft = document.querySelector('#buttons-left');
+  const $volumeBtn = document.querySelector('#volume-btn');
 
   $video.addEventListener('loadedmetadata', handleVideoLoad);
   $video.addEventListener('timeupdate', handleVideoTimeUpdate);
@@ -260,6 +312,11 @@ export const init = () => {
 
   $buttons.addEventListener('mouseover', handleButtonsMouseOver);
   $buttons.addEventListener('mouseout', handleButtonsMouseOut);
+
+  $volumeContainer.addEventListener('mouseenter', displayVolumeSlider);
+  $buttonsLeft.addEventListener('mouseleave', hideVolumeSlider);
+
+  $volumeControls.addEventListener('mousedown', handleVolumeMouseDown);
 
   $progressBar.addEventListener('mousedown', handleProgressBarMouseDown);
   $progressBar.addEventListener('mouseover', handleProgressBarMouseOver);

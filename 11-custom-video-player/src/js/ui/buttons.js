@@ -3,6 +3,32 @@ import { calcPercentageOfTotal, clamp, getCoordinatesRelativeToParent } from '..
 const $buttonsContainer = document.querySelector('#buttons');
 const $tooltip = document.querySelector('#button-tooltip');
 const $playBtn = document.querySelector('#play-btn');
+const $volumeUpIcon = document.querySelector('#volume-up-icon');
+const $volumeDownIcon = document.querySelector('#volume-down-icon');
+const $volumeMuteIcon = document.querySelector('#volume-mute-icon');
+
+export const updateVolumeButtonIcon = (volume) => {
+  if (volume > 0.5) {
+    $volumeUpIcon.classList.remove('hidden');
+    $volumeDownIcon.classList.add('hidden');
+    $volumeMuteIcon.classList.add('hidden');
+    return;
+  }
+
+  if (volume > 0 && volume < 0.5) {
+    $volumeDownIcon.classList.remove('hidden');
+    $volumeUpIcon.classList.add('hidden');
+    $volumeMuteIcon.classList.add('hidden');
+    return;
+  }
+
+  if (volume === 0) {
+    $volumeMuteIcon.classList.remove('hidden');
+    $volumeUpIcon.classList.add('hidden');
+    $volumeDownIcon.classList.add('hidden');
+    return;
+  }
+};
 
 export const togglePlayButtonIcon = () => {
   Array.from($playBtn.children).forEach((icon) => icon.classList.toggle('hidden'));

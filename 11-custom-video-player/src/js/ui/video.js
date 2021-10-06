@@ -30,6 +30,14 @@ export const pauseVideo = () => {
   return $video.pause();
 };
 
+export const getVideoVolume = () => {
+  return Number($video.volume);
+};
+
+export const updateVideoVolume = (volume) => {
+  $video.volume = volume;
+};
+
 export const toggleVideoPlayback = () => {
   return $video.paused ? $video.play() : $video.pause();
 };

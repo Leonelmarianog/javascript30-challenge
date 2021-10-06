@@ -54,7 +54,7 @@
                 <div class="buttons" id="buttons">
                     <div class="tooltip button-tooltip" id="button-tooltip"><!-- --></div>
 
-                    <div class="buttons-left">
+                    <div class="buttons-left" id="buttons-left">
                         <button class="player-btn" id="backwards-btn" data-title="Backwards (Left Arrow)">
                             <span class="icon">
                                 <i class="fas fa-backward"></i>
@@ -69,11 +69,29 @@
                                 <i class="fas fa-forward"></i>
                             </span>
                         </button>
-                        <button class="player-btn" id="volume-btn" data-title="Mute (m)">
-                            <span class="icon">
-                                <i class="fas fa-volume-up"></i>
-                            </span>
-                        </button>
+                        
+                        <div class="volume-container" id="volume-container">
+                            <button class="player-btn volume-btn" id="volume-btn" data-title="Mute (m)">
+                                <span class="icon" id="volume-up-icon">
+                                    <i class="fas fa-volume-up"></i>
+                                </span>
+                                <span class="icon hidden" id="volume-down-icon">
+                                    <i class="fas fa-volume-down"></i>
+                                </span>
+                                <span class="icon hidden" id="volume-mute-icon">
+                                    <i class="fas fa-volume-mute"></i>
+                                </span>
+                            </button>
+                                
+                            <div class="volume-controls" id="volume-controls">
+                                <div class="volume" id="volume" data-max="" data-value="">
+                                    <div class="volume-track" id="volume-track"></div>
+                                    <div class="volume-fill" id="volume-fill"></div>
+                                    <div class="volume-thumb" id="volume-thumb"></div>
+                                </div>
+                            </div>
+                        </div>
+
                         <p class="player-time" id="video-time">
                             <time id="time-elapsed-timestamp">--:--</time>
                             <span>&nbsp;/&nbsp;</span>
@@ -81,7 +99,7 @@
                         </p>
                     </div>
     
-                    <div class="buttons-right">
+                    <div class="buttons-right" id="buttons-right">
                         <button class="player-btn" id="config-btn" data-title="Configuration">
                             <span class="icon">
                                 <i class="fas fa-cog"></i>

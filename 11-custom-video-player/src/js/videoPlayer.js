@@ -70,8 +70,7 @@ const handleVideoLoad = (e) => {
   setProgressValue(e.target.currentTime);
   setProgressMaxValue(e.target.duration);
   setVolumeValue(e.target.volume);
-  setVolumeMaxValue(1);
-  updateVolumeButtonIcon(e.target.volume);
+  setVolumeMaxValue(e.target.volume);
   updateVolumePositionFromAttributes();
   updateProgressPositionFromAttributes();
   updateTimeElapsedTimestamp(getVideoTimeElapsed());

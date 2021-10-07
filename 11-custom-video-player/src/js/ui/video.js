@@ -44,8 +44,8 @@ export const toggleVideoPlayback = () => {
 
 export const toggleVideoStatus = () => {
   $video.paused
-    ? $video.setAttribute('data-status', VideoStatus.PLAYING)
-    : $video.setAttribute('data-status', VideoStatus.PAUSED);
+    ? $video.setAttribute('data-status', VideoStatus.PAUSED)
+    : $video.setAttribute('data-status', VideoStatus.PLAYING);
 };
 
 export const getVideoStatus = () => {

@@ -91,10 +91,7 @@ const handleVideoTimeUpdate = (e) => {
  * @param {MouseEvent} e
  */
 const handleVideoPlayback = (e) => {
-  toggleVideoStatus();
   toggleVideoPlayback();
-  togglePlayButtonIcon();
-  togglePlayButtonTitleFromVideoStatus(isVideoPaused());
   updateTooltipTextContent(e.currentTarget.getAttribute('data-title'));
   attachButtonTooltipToElement(e.currentTarget);
   displayButtonTooltip();
@@ -105,10 +102,7 @@ const handleVideoEnd = () => {
 };
 
 const handleVideoClick = () => {
-  toggleVideoStatus();
   toggleVideoPlayback();
-  togglePlayButtonIcon();
-  togglePlayButtonTitleFromVideoStatus(isVideoPaused());
   displayPlaybackHelper(isVideoPaused());
 };
 
@@ -161,10 +155,8 @@ const handleDocumentMouseMove = (e) => {
  * @param {MouseEvent} e
  */
 const handleDocumentMouseUp = (e) => {
-  if (getVideoStatus() === VideoStatus.PLAYING) {
+  if (getVideoStatus() === VideoStatus.PAUSED) {
     playVideo();
-    togglePlayButtonIcon();
-    togglePlayButtonTitleFromVideoStatus(isVideoPaused());
   }
 
   if (!e.target.closest('#progress')) {
@@ -193,8 +185,6 @@ const handleProgressBarMouseDown = (e) => {
 
   if (getVideoStatus() === VideoStatus.PLAYING) {
     pauseVideo();
-    togglePlayButtonIcon();
-    togglePlayButtonTitleFromVideoStatus(isVideoPaused());
   }
 };
 
@@ -283,6 +273,18 @@ const handleVolumeChange = () => {
   updateVolumeButtonIcon(getVideoVolume());
 };
 
+const handleVideoPlay = (e) => {
+  toggleVideoStatus();
+  togglePlayButtonIcon();
+  togglePlayButtonTitleFromVideoStatus(isVideoPaused());
+};
+
+const handleVideoPause = (e) => {
+  toggleVideoStatus();
+  togglePlayButtonIcon();
+  togglePlayButtonTitleFromVideoStatus(isVideoPaused());
+};
+
 export const init = () => {
   const $videoPlayer = document.querySelector('#video-player');
   const $video = createVideoElement({
@@ -307,6 +309,8 @@ export const init = () => {
   $video.addEventListener('ended', handleVideoEnd);
   $video.addEventListener('click', handleVideoClick);
   $video.addEventListener('volumechange', handleVolumeChange);
+  $video.addEventListener('play', handleVideoPlay);
+  $video.addEventListener('pause', handleVideoPause);
 
   $playBtn.addEventListener('click', handleVideoPlayback);
   $backwardsBtn.addEventListener('click', handleSkipVideoByButton);

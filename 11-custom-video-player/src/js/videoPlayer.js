@@ -268,7 +268,7 @@ const handleVolumeDocumentMouseUp = (e) => {
   document.removeEventListener('mouseup', handleVolumeDocumentMouseUp);
 };
 
-const handleVolumeChange = () => {
+const handleVideoVolumeChange = () => {
   updateVolumeButtonIcon(getVideoVolume());
 };
 
@@ -307,7 +307,7 @@ export const init = () => {
   $video.addEventListener('timeupdate', handleVideoTimeUpdate);
   $video.addEventListener('ended', handleVideoEnd);
   $video.addEventListener('click', handleVideoClick);
-  $video.addEventListener('volumechange', handleVolumeChange);
+  $video.addEventListener('volumechange', handleVideoVolumeChange);
   $video.addEventListener('play', handleVideoPlay);
   $video.addEventListener('pause', handleVideoPause);
 

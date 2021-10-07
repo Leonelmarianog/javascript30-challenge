@@ -89,7 +89,7 @@ const handleVideoTimeUpdate = (e) => {
 /**
  * @param {MouseEvent} e
  */
-const handleVideoPlayback = (e) => {
+const handlePlayButtonClick = (e) => {
   toggleVideoPlayback();
   updateTooltipTextContent(e.currentTarget.getAttribute('data-title'));
   attachButtonTooltipToElement(e.currentTarget);
@@ -311,7 +311,7 @@ export const init = () => {
   $video.addEventListener('play', handleVideoPlay);
   $video.addEventListener('pause', handleVideoPause);
 
-  $playBtn.addEventListener('click', handleVideoPlayback);
+  $playBtn.addEventListener('click', handlePlayButtonClick);
   $backwardsBtn.addEventListener('click', handleSkipVideoByButton);
   $forwardsBtn.addEventListener('click', handleSkipVideoByButton);
   document.addEventListener('keydown', handleSkipVideoByKey);

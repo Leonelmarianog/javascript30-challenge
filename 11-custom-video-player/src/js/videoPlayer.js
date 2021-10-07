@@ -261,14 +261,12 @@ const handleVolumeMouseDown = (e) => {
   updateVolumePosition(calculateVolumeOffsetX(e.pageX));
   updateVolumeValue(calculateVolumeOffsetX(e.pageX));
   updateVideoVolume(getVolumeValue());
-  updateVolumeButtonIcon(getVideoVolume());
 };
 
 const handleVolumeDocumentMouseMove = (e) => {
   updateVolumePosition(calculateVolumeOffsetX(e.pageX));
   updateVolumeValue(calculateVolumeOffsetX(e.pageX));
   updateVideoVolume(getVolumeValue());
-  updateVolumeButtonIcon(getVideoVolume());
   displayVolumeSlider();
 };
 
@@ -279,6 +277,10 @@ const handleVolumeDocumentMouseUp = (e) => {
 
   document.removeEventListener('mousemove', handleVolumeDocumentMouseMove);
   document.removeEventListener('mouseup', handleVolumeDocumentMouseUp);
+};
+
+const handleVolumeChange = () => {
+  updateVolumeButtonIcon(getVideoVolume());
 };
 
 export const init = () => {
@@ -304,6 +306,7 @@ export const init = () => {
   $video.addEventListener('timeupdate', handleVideoTimeUpdate);
   $video.addEventListener('ended', handleVideoEnd);
   $video.addEventListener('click', handleVideoClick);
+  $video.addEventListener('volumechange', handleVolumeChange);
 
   $playBtn.addEventListener('click', handleVideoPlayback);
   $backwardsBtn.addEventListener('click', handleSkipVideoByButton);

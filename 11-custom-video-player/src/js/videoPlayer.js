@@ -22,25 +22,6 @@ import {
   getVideoVolume,
 } from './ui/video.js';
 import {
-  calculateProgressOffsetX,
-  updateProgressTooltipPosition,
-  updateProgressTooltipTimestamp,
-  updateProgressPosition,
-  updateProgressHighlightPosition,
-  updateProgressValue,
-  updateProgressPositionFromAttributes,
-  getProgressValue,
-  setProgressMaxValue,
-  setProgressValue,
-  displayProgressThumb,
-  displayProgressTooltip,
-  hideProgressTooltip,
-  hideProgressHighlight,
-  hideProgressThumb,
-  scaleDownProgressHeight,
-  scaleUpProgressHeight,
-} from './ui/progress.js';
-import {
   attachButtonTooltipToElement,
   displayButtonTooltip,
   hideButtonTooltip,
@@ -62,17 +43,33 @@ import {
   updateVolumePositionFromAttributes,
   updateVolumeValue,
 } from './ui/volume.js';
+import {
+  animateScaleDown as animateProgressBarScaleDown,
+  animateScaleUp as animateProgressBarScaleUp,
+  config as configProgressBar,
+  hideHighlight as hideProgressBarHighlight,
+  hideTooltip as hideProgressBarTooltip,
+  initialize as initializeProgressBar,
+  isActive as isProgressBarActive,
+  toggleActiveStatus as toggleProgressBarActiveStatus,
+  updateHighlight as updateProgressBarHighlight,
+  updateTooltip as updateProgressBarTooltip,
+  updateValue as updateProgressBarValue,
+} from './ui/progressBar.js';
 
 /**
  * @param {Event} e
  */
 const handleVideoLoad = (e) => {
-  setProgressValue(e.target.currentTime);
-  setProgressMaxValue(e.target.duration);
+  configProgressBar({
+    range: {
+      min: e.target.currentTime,
+      max: e.target.duration,
+    },
+  });
   setVolumeValue(e.target.volume);
   setVolumeMaxValue(e.target.volume);
   updateVolumePositionFromAttributes();
-  updateProgressPositionFromAttributes();
   updateTimeElapsedTimestamp(getVideoTimeElapsed());
   updateLengthTimestamp(getVideoLength());
 };
@@ -81,8 +78,7 @@ const handleVideoLoad = (e) => {
  * @param {Event} e
  */
 const handleVideoTimeUpdate = (e) => {
-  setProgressValue(e.target.currentTime);
-  updateProgressPositionFromAttributes();
+  updateProgressBarValue(e.target.currentTime);
   updateTimeElapsedTimestamp(getVideoTimeElapsed());
 };
 
@@ -91,6 +87,7 @@ const handleVideoTimeUpdate = (e) => {
  */
 const handlePlayButtonClick = (e) => {
   toggleVideoPlayback();
+  toggleVideoStatus();
   updateTooltipTextContent(e.currentTarget.getAttribute('data-title'));
   attachButtonTooltipToElement(e.currentTarget);
   displayButtonTooltip();
@@ -102,6 +99,7 @@ const handleVideoEnd = () => {
 
 const handleVideoClick = () => {
   toggleVideoPlayback();
+  toggleVideoStatus();
   displayPlaybackHelper(isVideoPaused());
 };
 
@@ -133,88 +131,6 @@ const handleSkipVideoByKey = (e) => {
     displaySkipBackwardsHelper(videoConfig.SKIP_AMOUNT_IN_SECONDS);
     skipVideoByAmount(-videoConfig.SKIP_AMOUNT_IN_SECONDS);
   }
-};
-
-/**
- * @param {MouseEvent} e
- */
-const handleDocumentMouseMove = (e) => {
-  const offsetX = calculateProgressOffsetX(e.pageX);
-  displayProgressThumb();
-  scaleUpProgressHeight();
-  updateProgressPosition(offsetX);
-  updateProgressValue(offsetX);
-  updateVideoCurrentTime(getProgressValue());
-  updateProgressTooltipTimestamp(offsetX);
-  updateProgressTooltipPosition(offsetX);
-  displayProgressTooltip();
-};
-
-/**
- * @param {MouseEvent} e
- */
-const handleDocumentMouseUp = (e) => {
-  if (getVideoStatus() === VideoStatus.PAUSED) {
-    playVideo();
-  }
-
-  if (!e.target.closest('#progress')) {
-    hideProgressThumb();
-    scaleDownProgressHeight();
-    hideProgressTooltip();
-  }
-
-  document.removeEventListener('mousemove', handleDocumentMouseMove);
-  document.removeEventListener('mouseup', handleDocumentMouseUp);
-};
-
-/**
- * @param {MouseEvent} e
- */
-const handleProgressBarMouseDown = (e) => {
-  e.preventDefault();
-
-  document.addEventListener('mousemove', handleDocumentMouseMove);
-  document.addEventListener('mouseup', handleDocumentMouseUp);
-
-  const offsetX = calculateProgressOffsetX(e.pageX);
-  updateProgressPosition(offsetX);
-  updateProgressValue(offsetX);
-  updateVideoCurrentTime(getProgressValue());
-
-  if (getVideoStatus() === VideoStatus.PLAYING) {
-    pauseVideo();
-  }
-};
-
-/**
- * @param {MouseEvent} e
- */
-const handleProgressBarMouseOver = (e) => {
-  const offsetX = calculateProgressOffsetX(e.pageX);
-  displayProgressThumb();
-  scaleUpProgressHeight();
-  updateProgressHighlightPosition(offsetX);
-  updateProgressTooltipTimestamp(offsetX);
-  updateProgressTooltipPosition(offsetX);
-  displayProgressTooltip();
-};
-
-/**
- * @param {MouseEvent} e
- */
-const handleProgressBarMouseMove = (e) => {
-  const offsetX = calculateProgressOffsetX(e.pageX);
-  updateProgressHighlightPosition(offsetX);
-  updateProgressTooltipTimestamp(offsetX);
-  updateProgressTooltipPosition(offsetX);
-};
-
-const handleProgressBarMouseOut = () => {
-  hideProgressThumb();
-  scaleDownProgressHeight();
-  hideProgressHighlight();
-  hideProgressTooltip();
 };
 
 /**
@@ -273,15 +189,63 @@ const handleVideoVolumeChange = () => {
 };
 
 const handleVideoPlay = (e) => {
-  toggleVideoStatus();
   togglePlayButtonIcon();
   togglePlayButtonTitleFromVideoStatus(isVideoPaused());
 };
 
 const handleVideoPause = (e) => {
-  toggleVideoStatus();
   togglePlayButtonIcon();
   togglePlayButtonTitleFromVideoStatus(isVideoPaused());
+};
+
+const handleProgressBarMouseUp = (e) => {
+  if (e.target.closest('#progress-controls')) {
+    return;
+  }
+
+  hideProgressBarTooltip();
+  animateProgressBarScaleDown();
+  toggleProgressBarActiveStatus();
+
+  document.removeEventListener('mouseup', handleProgressBarMouseUp);
+};
+
+const handleProgressBarStart = () => {
+  toggleProgressBarActiveStatus();
+
+  if (getVideoStatus() === VideoStatus.PLAYING) {
+    pauseVideo();
+  }
+
+  document.addEventListener('mouseup', handleProgressBarMouseUp);
+};
+
+const handleProgressBarSlide = ([value]) => {
+  hideProgressBarHighlight();
+  updateVideoCurrentTime(value);
+  updateProgressBarTooltip(value);
+};
+
+const handleProgressBarHover = (value) => {
+  updateProgressBarHighlight(value);
+  updateProgressBarTooltip(value);
+  animateProgressBarScaleUp();
+};
+
+const handleProgressBarEnd = () => {
+  if (getVideoStatus() === VideoStatus.PLAYING) {
+    playVideo();
+  }
+};
+
+const handleProgressBarMouseOut = () => {
+  if (isProgressBarActive()) {
+    return;
+  }
+
+  hideProgressBarHighlight();
+  animateProgressBarScaleDown();
+  hideProgressBarTooltip();
 };
 
 export const init = () => {
@@ -295,13 +259,31 @@ export const init = () => {
   const $playBtn = document.querySelector('#play-btn');
   const $backwardsBtn = document.querySelector('#backwards-btn');
   const $forwardsBtn = document.querySelector('#forwards-btn');
-  const $progressBar = document.querySelector('#progress');
   const $buttons = document.querySelector('#buttons');
   const $volumeControls = document.querySelector('#volume-controls');
   const $volumeContainer = document.querySelector('#volume-container');
   const $buttonsRight = document.querySelector('#buttons-right');
   const $buttonsLeft = document.querySelector('#buttons-left');
   const $volumeBtn = document.querySelector('#volume-btn');
+
+  const $progressControls = document.querySelector('#progress-controls');
+  const $progressBar = document.querySelector('#progress-bar');
+  const progressBarApi = initializeProgressBar($progressBar, {
+    start: 0,
+    connect: 'lower',
+    behaviour: 'snap-hover',
+    animate: false, // fixes hover event not firing inmmediately after slide + updating value - TODO: look at noUiSlider source code and find out what why this fixes it
+    range: {
+      min: 0,
+      max: 100,
+    },
+  });
+
+  progressBarApi.on('start', handleProgressBarStart);
+  progressBarApi.on('slide', handleProgressBarSlide);
+  progressBarApi.on('hover', handleProgressBarHover);
+  progressBarApi.on('end', handleProgressBarEnd);
+  $progressControls.addEventListener('mouseleave', handleProgressBarMouseOut);
 
   $video.addEventListener('loadedmetadata', handleVideoLoad);
   $video.addEventListener('timeupdate', handleVideoTimeUpdate);
@@ -323,9 +305,4 @@ export const init = () => {
   $buttonsLeft.addEventListener('mouseleave', hideVolumeSlider);
 
   $volumeControls.addEventListener('mousedown', handleVolumeMouseDown);
-
-  $progressBar.addEventListener('mousedown', handleProgressBarMouseDown);
-  $progressBar.addEventListener('mouseover', handleProgressBarMouseOver);
-  $progressBar.addEventListener('mousemove', handleProgressBarMouseMove);
-  $progressBar.addEventListener('mouseout', handleProgressBarMouseOut);
 };

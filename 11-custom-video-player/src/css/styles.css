@@ -9,6 +9,20 @@
 
   --volume-controls-width: 0;
   --volume-slider-width: calc(var(--player-width) * 0.075);
+
+  /* ------------------------------ */
+
+  --player-width: 100vw;
+  --progress-width: 100%;
+  --progress-height: calc(var(--player-width) / 40);
+  --progress-track-height: calc(var(--progress-height) - var(--progress-padding-top));
+  --progress-padding-top: calc(var(--progress-height) / 1.25);
+  --progress-track-color: hsl(0, 0%, 100%, 0.25);
+  --progress-highlight-color: hsl(0, 0%, 100%, 0.25);
+  --progress-fill-color: #f00;
+  --progress-thumb-color: #f00;
+  --progress-thumb-width: calc(var(--progress-track-height) * 3);
+  --progress-thumb-height: calc(var(--progress-track-height) * 3);
 }
 
 @media screen and (min-width: 576px) {
@@ -61,7 +75,7 @@ main {
   padding: 0 calc(var(--player-width) * 0.025);
 }
 
-.progress {
+/* .progress {
   height: var(--progress-height);
   width: 100%;
   cursor: pointer;
@@ -86,9 +100,11 @@ main {
 
 .progress-highlight {
   background-color: #777;
-  width: 0%;
+  width: 50%;
   height: 100%;
   position: absolute;
+  top: 0;
+  left: 0;
   transition: transform 0.2s;
 }
 
@@ -102,7 +118,7 @@ main {
   left: 0%;
   transform: scale(0);
   transition: transform 0.2s;
-}
+} */
 
 .buttons {
   display: flex;
@@ -188,6 +204,7 @@ main {
   font-size: calc(var(--player-width) * 0.015);
   opacity: 0;
   transition: opacity 0.2s;
+  pointer-events: none;
 }
 
 .button-tooltip {
@@ -200,7 +217,7 @@ main {
 
 .progress-tooltip {
   position: absolute;
-  top: calc(var(--progress-height) * -10);
+  top: calc(var(--progress-height) * -1);
   left: 0;
   background-color: transparent;
 }
@@ -392,4 +409,87 @@ main {
   position: absolute;
   top: calc(50% - var(--thumb-height) * 0.5);
   left: 0%;
+}
+
+/* ----------------------- */
+
+.progress-controls {
+  margin: auto;
+  height: var(--progress-height);
+  width: var(--progress-width);
+  position: relative;
+}
+
+.progress-bar {
+  height: 100%;
+  width: var(--progress-width);
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.progress-track {
+  background: var(--progress-track-color);
+  height: var(--progress-track-height);
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 0) scaleY(0.5);
+  transition: transform 0.2s;
+}
+
+.progress-highlight {
+  background: var(--progress-highlight-color);
+  height: 100%;
+  width: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#progress-bar .noUi-base {
+  padding-top: var(--progress-padding-top);
+}
+
+#progress-bar.noUi-target {
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+  background: transparent;
+}
+
+#progress-bar .noUi-connects {
+  border-radius: 0;
+  transform: scaleY(0.5);
+  transition: transform 0.2s;
+}
+
+#progress-bar .noUi-connect {
+  background: var(--progress-fill-color);
+  border-radius: 0;
+}
+
+#progress-bar .noUi-handle {
+  height: var(--progress-thumb-height);
+  width: var(--progress-thumb-width);
+  top: calc(
+    var(--progress-height) - var(--progress-track-height) - var(--progress-thumb-height) / 2 +
+      var(--progress-track-height) / 2
+  );
+  right: calc(var(--progress-thumb-width) / -2);
+  border-radius: 50%;
+  background: var(--progress-thumb-color);
+  box-shadow: none;
+  border: none;
+  cursor: pointer;
+  transform: scaleY(0);
+  transition: transform 0.2s;
+}
+
+#progress-bar .noUi-handle::before,
+.noUi-handle::after {
+  content: none;
 }

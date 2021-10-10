@@ -9,7 +9,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="./src/css/normalize.css">
+    <link rel="stylesheet" href="./src/css/vendor/normalize.css">
+    <link rel="stylesheet" href="./src/css/vendor/nouislider.css">
     <link rel="stylesheet" href="./src/css/styles.css">
 </head>
 <body>
@@ -43,12 +44,14 @@
             </div>
 
             <div class="player-controls" id="player-controls">
-                <div class="progress" id="progress" data-max="" data-value="">
-                    <time class="tooltip progress-tooltip" id="progress-tooltip"><!-- --></time>
-                    <div class="progress-track" id="progress-track"></div>
-                    <div class="progress-highlight" id="progress-highlight"></div>
-                    <div class="progress-fill" id="progress-fill"></div>
-                    <div class="progress-thumb" id="progress-thumb"></div>
+                <div class="progress-controls" id="progress-controls">
+                    <div class="tooltip progress-tooltip" id="progress-tooltip"><!-- --></div>
+
+                    <div class="progress-track" id="progress-track">
+                        <div class="progress-highlight" id="progress-highlight"></div>
+                    </div>
+
+                    <div class="progress-bar" id="progress-bar"></div>
                 </div>
 
                 <div class="buttons" id="buttons">

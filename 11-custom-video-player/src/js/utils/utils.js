@@ -37,3 +37,10 @@ export const formatTime = ({ hours: hrs, minutes: mins, seconds: secs }) => {
 export const createTimestampString = ({ hours, minutes, seconds }) => {
   return hours ? `${hours}:${minutes}:${seconds}` : `${minutes}:${seconds}`;
 };
+
+export const createTimeString = (timeInSeconds) => {
+  const timeInHoursMinutesSeconds = fromSecondsToHoursMinutesSeconds(timeInSeconds);
+  const { hours, minutes, seconds } = formatTime(timeInHoursMinutesSeconds);
+
+  return hours ? `${hours}:${minutes}:${seconds}` : `${minutes}:${seconds}`;
+};

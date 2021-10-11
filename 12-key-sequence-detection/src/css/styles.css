@@ -1,0 +1,29 @@
+html {
+  font-size: 62.5%;
+}
+
+body {
+  height: 100vh;
+  font-size: 1.6rem;
+  font-family: monospace;
+  background-color: #222;
+  color: #fff;
+}
+
+main {
+  height: 100%;
+  display: flex;
+}
+
+.container {
+  margin: auto 0;
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 3rem;
+}
+
+.key {
+  margin: 0 0.25em;
+}
